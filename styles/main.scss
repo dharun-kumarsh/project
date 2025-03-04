@@ -1,0 +1,318 @@
+// Variables
+$primary-color: #1a237e;
+$secondary-color: #0d47a1;
+$accent-color: #2196f3;
+$text-color: #333;
+$light-gray: #f5f5f5;
+$transition-speed: 0.3s;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin card-shadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow $transition-speed ease;
+  
+  &:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Global Styles
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: $text-color;
+  overflow-x: hidden;
+}
+
+// Navigation
+.navbar {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem 0;
+  transition: all $transition-speed ease;
+
+  &.scrolled {
+    padding: 0.5rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-brand {
+    .logo {
+      height: 50px;
+      transition: height $transition-speed ease;
+    }
+  }
+
+  .nav-link {
+    position: relative;
+    padding: 0.5rem 1rem;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: $primary-color;
+      transition: all $transition-speed ease;
+      transform: translateX(-50%);
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+}
+
+// Hero Section
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, $primary-color, $secondary-color);
+  color: white;
+  padding: 120px 0;
+  
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+// Achievements Section
+.achievements {
+  padding: 80px 0;
+  background: $light-gray;
+
+  .achievement-card {
+    @include card-shadow;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+
+    i {
+      font-size: 2.5rem;
+      color: $accent-color;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+// Events Calendar
+.events {
+  padding: 80px 0;
+
+  #calendar {
+    @include card-shadow;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+  }
+}
+
+// Faculty Section
+.faculty {
+  padding: 80px 0;
+  background: $light-gray;
+
+  .faculty-filters {
+    margin-bottom: 2rem;
+    text-align: center;
+
+    .btn {
+      margin: 0.25rem;
+    }
+  }
+
+  .faculty-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+}
+
+// Gallery
+.gallery {
+  padding: 80px 0;
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+
+    img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      @include card-shadow;
+    }
+  }
+}
+
+// Contact Section
+.contact {
+  padding: 80px 0;
+  background: $light-gray;
+
+  .contact-map {
+    height: 300px;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+  }
+
+  .contact-info {
+    .info-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      i {
+        width: 40px;
+        height: 40px;
+        @include flex-center;
+        background: $primary-color;
+        color: white;
+        border-radius: 50%;
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
+// Footer
+.footer {
+  background: $primary-color;
+  color: white;
+  padding: 80px 0 20px;
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 0.5rem;
+
+      a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: color $transition-speed ease;
+
+        &:hover {
+          color: white;
+        }
+      }
+    }
+  }
+
+  .social-links {
+    a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      @include flex-center;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      transition: background $transition-speed ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+
+  .footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+  }
+}
+
+// Chat Widget
+.chat-widget {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+
+  .chat-toggle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: $accent-color;
+    color: white;
+    border: none;
+    cursor: pointer;
+    @include flex-center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform $transition-speed ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    i {
+      font-size: 1.5rem;
+    }
+  }
+
+  .chat-container {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 350px;
+    height: 500px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-aos] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+
+  &.aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
